@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shivam | Java Full Stack Developer</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0b1120;
+        --panel: #111827;
+        --panel-light: #1f2937;
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --primary: #38bdf8;
+        --accent: #22c55e;
+        --border: rgba(148, 163, 184, 0.25);
+        --shadow: 0 24px 60px rgba(15, 23, 42, 0.45);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: radial-gradient(circle at top, #0f172a, #020617);
+        color: var(--text);
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .container {
+        width: min(1100px, 92%);
+        margin: 0 auto;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(2, 6, 23, 0.75);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 0;
+      }
+
+      .brand {
+        font-weight: 700;
+        font-size: 20px;
+        letter-spacing: 0.5px;
+        color: var(--primary);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 20px;
+        list-style: none;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--muted);
+        transition: 0.2s ease;
+      }
+
+      .nav-links a:hover {
+        color: var(--primary);
+      }
+
+      .hero {
+        padding: 100px 0 60px;
+        display: grid;
+        gap: 40px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        align-items: center;
+      }
+
+      .hero-card {
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 32px;
+        box-shadow: var(--shadow);
+      }
+
+      .hero h1 {
+        font-size: clamp(32px, 4vw, 44px);
+        margin-bottom: 16px;
+      }
+
+      .hero h1 span {
+        color: var(--primary);
+      }
+
+      .hero p {
+        color: var(--muted);
+        line-height: 1.7;
+        margin-bottom: 24px;
+      }
+
+      .hero-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      .pill {
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(56, 189, 248, 0.15);
+        border: 1px solid rgba(56, 189, 248, 0.35);
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+      }
+
+      .cta {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        padding: 12px 22px;
+        border-radius: 12px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: 0.2s ease;
+        border: 1px solid transparent;
+      }
+
+      .btn.primary {
+        background: var(--primary);
+        color: #020617;
+      }
+
+      .btn.secondary {
+        background: transparent;
+        border-color: var(--border);
+        color: var(--text);
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+
+      section {
+        padding: 70px 0;
+      }
+
+      .section-title {
+        font-size: 26px;
+        margin-bottom: 24px;
+      }
+
+      .section-subtitle {
+        color: var(--muted);
+        margin-bottom: 32px;
+        line-height: 1.7;
+      }
+
+      .grid {
+        display: grid;
+        gap: 20px;
+      }
+
+      .grid.two {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      }
+
+      .grid.three {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 24px;
+        line-height: 1.7;
+      }
+
+      .card strong {
+        display: block;
+        font-size: 16px;
+        margin-bottom: 8px;
+      }
+
+      .list {
+        list-style: none;
+        display: grid;
+        gap: 14px;
+      }
+
+      .list li {
+        padding: 14px 16px;
+        border-radius: 14px;
+        background: var(--panel-light);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+      }
+
+      .skill-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .skill-tags span {
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(148, 163, 184, 0.15);
+        border: 1px solid rgba(148, 163, 184, 0.25);
+        font-size: 13px;
+      }
+
+      footer {
+        padding: 30px 0 40px;
+        text-align: center;
+        color: var(--muted);
+        border-top: 1px solid var(--border);
+      }
+
+      @media (max-width: 720px) {
+        .nav {
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .nav-links {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container nav">
+        <div class="brand">Shivam</div>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#project">Project</a></li>
+          <li><a href="#cloud">Cloud & CI/CD</a></li>
+          <li><a href="#integration">Integration</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#education">Education</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero" id="about">
+        <div>
+          <div class="hero-meta">
+            <span class="pill">Java Full Stack Developer</span>
+            <span class="pill">3.2 Years Experience</span>
+            <span class="pill">Spring Boot · AWS · React</span>
+          </div>
+          <h1>Building scalable web platforms with <span>Java</span> and modern cloud.</h1>
+          <p>
+            Java Full Stack Developer with 3.2 years of experience designing and developing
+            scalable web applications using Java, Spring Boot, React, TypeScript, MySQL, and AWS.
+            Experienced in building RESTful APIs, integrating cloud services, and implementing
+            responsive front-end interfaces. Strong background in backend development, database
+            design, CI/CD pipelines, and Agile collaboration. Adept at debugging, performance
+            tuning, and delivering production-ready solutions using Git, Docker, and GitHub
+            Actions.
+          </p>
+          <div class="cta">
+            <a class="btn primary" href="https://www.linkedin.com/in/kmrsivm/" target="_blank" rel="noopener"
+              >View LinkedIn</a
+            >
+            <a class="btn secondary" href="#project">View Project</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="grid two">
+            <div class="card">
+              <strong>Backend Focus</strong>
+              REST APIs, microservices, Spring Security, multi-tenant systems.
+            </div>
+            <div class="card">
+              <strong>Cloud & DevOps</strong>
+              AWS EC2, Lambda, IAM, Docker, GitHub Actions CI/CD.
+            </div>
+            <div class="card">
+              <strong>Frontend Delivery</strong>
+              React + TypeScript interfaces with responsive design.
+            </div>
+            <div class="card">
+              <strong>Quality & Scale</strong>
+              Performance tuning, testing, code reviews, production readiness.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title">Professional Highlights</h2>
+        <p class="section-subtitle">
+          A focused, senior-style summary that reflects ownership across backend architecture,
+          DevOps automation, and user-facing product delivery.
+        </p>
+        <div class="grid three">
+          <div class="card">
+            <strong>Architecture</strong>
+            Scalable systems, data modeling, multi-tenant design, role-based access.
+          </div>
+          <div class="card">
+            <strong>Engineering Workflow</strong>
+            Agile collaboration, CI/CD automation, secure deployments.
+          </div>
+          <div class="card">
+            <strong>Product Impact</strong>
+            AI-powered learning, reliable payments, and consistent UX across devices.
+          </div>
+        </div>
+      </section>
+
+      <section id="project">
+        <h2 class="section-title">Project – E-learning Platform</h2>
+        <div class="grid two">
+          <div class="card">
+            <strong>AI-Powered Code Evaluation</strong>
+            Built an AI-powered code submission and evaluation platform using Spring AI, enabling
+            automated code analysis, validation, and feedback to improve learning outcomes.
+          </div>
+          <div class="card">
+            <strong>Gemini LLM Integration</strong>
+            Leveraged Gemini LLM for intelligent code evaluation and feedback generation, enhancing
+            AI-driven assessment accuracy within the platform.
+          </div>
+          <div class="card">
+            <strong>Role-Based Scheduling</strong>
+            Developed a scalable e-learning platform supporting role-based scheduling for
+            administrators, instructors, and students.
+          </div>
+          <div class="card">
+            <strong>Automation & Communication</strong>
+            Integrated calendar synchronization with automated reminders via email and push
+            notifications for seamless communication.
+          </div>
+          <div class="card">
+            <strong>Multi-Device Delivery</strong>
+            Supported multi-device compatibility with responsive views embedded into external
+            subscriber portals.
+          </div>
+          <div class="card">
+            <strong>Serverless Accuracy</strong>
+            Built AWS Lambda functions to dynamically refresh database views and improve data
+            accuracy in real time.
+          </div>
+          <div class="card">
+            <strong>Multi-Tenant Enablement</strong>
+            Designed a multi-tenant system allowing schools or educational organizations to register
+            independently and manage their own users and content.
+          </div>
+          <div class="card">
+            <strong>Payments</strong>
+            Implemented secure and customized payment gateways for each institution, providing
+            reliable and transparent transaction workflows.
+          </div>
+        </div>
+      </section>
+
+      <section id="cloud">
+        <h2 class="section-title">Cloud Deployment & CI/CD Automation</h2>
+        <ul class="list">
+          <li>Designed and implemented CI/CD pipelines using GitHub Actions for automated build, test, and deployment workflows.</li>
+          <li>Configured pipeline triggers on code commits to enable faster and reliable deployments.</li>
+          <li>Deployed Spring Boot microservices on AWS EC2 with production-ready configurations.</li>
+          <li>Containerized applications using Docker to ensure environment consistency.</li>
+          <li>Managed application configuration using environment variables and secrets management.</li>
+          <li>Configured AWS Security Groups and IAM roles for secure access and permissions.</li>
+          <li>Monitored deployments and performed rollback procedures to ensure system stability.</li>
+        </ul>
+      </section>
+
+      <section id="integration">
+        <h2 class="section-title">Frontend–Backend Integration Layer (TypeScript)</h2>
+        <ul class="list">
+          <li>Developed a TypeScript-based middleware layer to handle communication between frontend and backend services.</li>
+          <li>Integrated RESTful APIs and defined standardized data contracts for frontend consumption.</li>
+          <li>Processed, transformed, and aggregated backend responses to optimize frontend performance.</li>
+          <li>Implemented loose coupling between frontend and backend to improve scalability and maintainability.</li>
+        </ul>
+      </section>
+
+      <section id="skills">
+        <h2 class="section-title">Skills</h2>
+        <div class="card">
+          <div class="skill-tags">
+            <span>Core Java</span>
+            <span>Spring Boot</span>
+            <span>Spring AI</span>
+            <span>AWS</span>
+            <span>CI/CD</span>
+            <span>GitHub Actions</span>
+            <span>RESTful Services</span>
+            <span>Git Version Control</span>
+            <span>MySQL/MariaDB</span>
+            <span>Spring Security</span>
+            <span>Multi-Threading</span>
+            <span>Data Structures and Algorithms</span>
+            <span>Spring Data JPA</span>
+            <span>JUnit Testing</span>
+            <span>Spring Framework</span>
+            <span>Object-Oriented Programming</span>
+            <span>Backend Development</span>
+            <span>Skilled in Adaptability</span>
+            <span>Teamwork</span>
+            <span>Creativity</span>
+            <span>DevOps</span>
+            <span>Docker</span>
+            <span>Software Updates</span>
+            <span>Application Design</span>
+            <span>Design Principles</span>
+            <span>Code Reviews</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="education">
+        <h2 class="section-title">Education</h2>
+        <div class="grid two">
+          <div class="card">
+            <strong>MCA</strong>
+            J.S University, Shikohabad<br />
+            June 2019 - May 2022
+          </div>
+          <div class="card">
+            <strong>BCA</strong>
+            Veer Bahadur Singh Purvanchal University, Jaunpur<br />
+            June 2016 - May 2019
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      © 2026 Shivam | Java Full Stack Developer
+    </footer>
+  </body>
+</html>
