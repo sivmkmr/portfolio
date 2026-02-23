@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shivam | Java Full Stack Developer</title>
+    <title>Shivam Kumar | Java Full Stack Developer</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
@@ -35,6 +35,15 @@
       body {
         background: radial-gradient(circle at top, #0f172a, #020617);
         color: var(--text);
+      }
+
+      #bg-canvas {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
       }
 
       a {
@@ -102,6 +111,7 @@
         border-radius: 24px;
         padding: 32px;
         box-shadow: var(--shadow);
+        animation: float 6s ease-in-out infinite;
       }
 
       .hero h1 {
@@ -149,11 +159,14 @@
         text-decoration: none;
         transition: 0.2s ease;
         border: 1px solid transparent;
+        position: relative;
+        overflow: hidden;
       }
 
       .btn.primary {
         background: var(--primary);
         color: #020617;
+        box-shadow: 0 12px 24px rgba(56, 189, 248, 0.25);
       }
 
       .btn.secondary {
@@ -164,6 +177,23 @@
 
       .btn:hover {
         transform: translateY(-2px);
+      }
+
+      .btn::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        transform: translateX(-110%);
+        background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: transform 0.6s ease;
+      }
+
+      .btn:hover::after {
+        transform: translateX(110%);
+      }
+
+      .btn.animated {
+        animation: pulse 2.8s ease-in-out infinite;
       }
 
       section {
@@ -200,6 +230,13 @@
         border-radius: 20px;
         padding: 24px;
         line-height: 1.7;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        animation: fadeUp 0.6s ease both;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.45);
       }
 
       .card strong {
@@ -242,6 +279,100 @@
         border-top: 1px solid var(--border);
       }
 
+      header,
+      main,
+      footer {
+        position: relative;
+        z-index: 1;
+      }
+
+      .profile-card {
+        display: grid;
+        gap: 16px;
+      }
+
+      .avatar {
+        width: 86px;
+        height: 86px;
+        border-radius: 24px;
+        display: grid;
+        place-items: center;
+        font-size: 30px;
+        font-weight: 700;
+        color: #020617;
+        background: linear-gradient(135deg, #38bdf8, #22c55e);
+        box-shadow: 0 16px 30px rgba(34, 197, 94, 0.25);
+      }
+
+      .profile-name {
+        font-size: 22px;
+        font-weight: 700;
+      }
+
+      .profile-role {
+        color: var(--muted);
+      }
+
+      .profile-info {
+        display: grid;
+        gap: 10px;
+      }
+
+      .profile-info span {
+        display: block;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .profile-links {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .contact-grid {
+        display: grid;
+        gap: 16px;
+      }
+
+      .contact-item {
+        padding: 16px 18px;
+        border-radius: 16px;
+        background: var(--panel-light);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          box-shadow: 0 12px 24px rgba(56, 189, 248, 0.25);
+        }
+        50% {
+          box-shadow: 0 20px 36px rgba(56, 189, 248, 0.45);
+        }
+      }
+
+      @keyframes fadeUp {
+        0% {
+          opacity: 0;
+          transform: translateY(14px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
       @media (max-width: 720px) {
         .nav {
           flex-direction: column;
@@ -256,16 +387,17 @@
     </style>
   </head>
   <body>
+    <canvas id="bg-canvas"></canvas>
     <header>
       <div class="container nav">
         <div class="brand">Shivam</div>
         <ul class="nav-links">
           <li><a href="#about">About</a></li>
-          <li><a href="#project">Project</a></li>
-          <li><a href="#cloud">Cloud & CI/CD</a></li>
-          <li><a href="#integration">Integration</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
           <li><a href="#skills">Skills</a></li>
           <li><a href="#education">Education</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
     </header>
@@ -278,7 +410,7 @@
             <span class="pill">3.2 Years Experience</span>
             <span class="pill">Spring Boot · AWS · React</span>
           </div>
-          <h1>Building scalable web platforms with <span>Java</span> and modern cloud.</h1>
+          <h1>Shivam <span>Kumar</span></h1>
           <p>
             Java Full Stack Developer with 3.2 years of experience designing and developing
             scalable web applications using Java, Spring Boot, React, TypeScript, MySQL, and AWS.
@@ -289,123 +421,89 @@
             Actions.
           </p>
           <div class="cta">
-            <a class="btn primary" href="https://www.linkedin.com/in/kmrsivm/" target="_blank" rel="noopener"
+            <a class="btn primary animated" href="https://www.linkedin.com/in/shivam-kumar-1496963a1" target="_blank" rel="noopener"
               >View LinkedIn</a
             >
-            <a class="btn secondary" href="#project">View Project</a>
+            <a class="btn secondary" href="https://github.com/sivmkmr" target="_blank" rel="noopener"
+              >View GitHub</a
+            >
+            <a class="btn secondary" href="#contact">Contact Me</a>
           </div>
         </div>
         <div class="hero-card">
-          <div class="grid two">
-            <div class="card">
-              <strong>Backend Focus</strong>
-              REST APIs, microservices, Spring Security, multi-tenant systems.
+          <div class="profile-card">
+            <div class="avatar">SK</div>
+            <div>
+              <div class="profile-name">Shivam Kumar</div>
+              <div class="profile-role">Java Full Stack Developer</div>
             </div>
-            <div class="card">
-              <strong>Cloud & DevOps</strong>
-              AWS EC2, Lambda, IAM, Docker, GitHub Actions CI/CD.
+            <div class="profile-info">
+              <span>Ghaziabad, Uttar Pradesh</span>
+              <span>shivamkumarg10@gmail.com</span>
+              <span>+91 8840170691</span>
             </div>
-            <div class="card">
-              <strong>Frontend Delivery</strong>
-              React + TypeScript interfaces with responsive design.
-            </div>
-            <div class="card">
-              <strong>Quality & Scale</strong>
-              Performance tuning, testing, code reviews, production readiness.
+            <div class="profile-links">
+              <a class="btn primary" href="https://www.linkedin.com/in/shivam-kumar-1496963a1" target="_blank" rel="noopener"
+                >LinkedIn</a
+              >
+              <a class="btn secondary" href="https://github.com/sivmkmr" target="_blank" rel="noopener"
+                >GitHub</a
+              >
             </div>
           </div>
         </div>
       </section>
 
-      <section>
-        <h2 class="section-title">Professional Highlights</h2>
+      <section id="experience">
+        <h2 class="section-title">Work Experience</h2>
         <p class="section-subtitle">
-          A focused, senior-style summary that reflects ownership across backend architecture,
-          DevOps automation, and user-facing product delivery.
+          Java Backend Developer — Virtusa Systems Software | Virginia, USA (11/2022 to Till date)
         </p>
-        <div class="grid three">
-          <div class="card">
-            <strong>Architecture</strong>
-            Scalable systems, data modeling, multi-tenant design, role-based access.
-          </div>
-          <div class="card">
-            <strong>Engineering Workflow</strong>
-            Agile collaboration, CI/CD automation, secure deployments.
-          </div>
-          <div class="card">
-            <strong>Product Impact</strong>
-            AI-powered learning, reliable payments, and consistent UX across devices.
-          </div>
-        </div>
-      </section>
-
-      <section id="project">
-        <h2 class="section-title">Project – E-learning Platform</h2>
         <div class="grid two">
           <div class="card">
-            <strong>AI-Powered Code Evaluation</strong>
-            Built an AI-powered code submission and evaluation platform using Spring AI, enabling
-            automated code analysis, validation, and feedback to improve learning outcomes.
+            <strong>E-learning Platform</strong>
+            <ul class="list">
+              <li>Developed a scalable e-learning platform supporting role-based scheduling for administrators, instructors, and students.</li>
+              <li>Enabled schedule creation, editing, and viewing tailored to user permissions, improving usability and content access.</li>
+              <li>Integrated calendar synchronization with automated reminders via email and push notifications.</li>
+              <li>Supported multi-device compatibility with responsive views embedded into external subscriber portals.</li>
+            </ul>
           </div>
           <div class="card">
-            <strong>Gemini LLM Integration</strong>
-            Leveraged Gemini LLM for intelligent code evaluation and feedback generation, enhancing
-            AI-driven assessment accuracy within the platform.
-          </div>
-          <div class="card">
-            <strong>Role-Based Scheduling</strong>
-            Developed a scalable e-learning platform supporting role-based scheduling for
-            administrators, instructors, and students.
-          </div>
-          <div class="card">
-            <strong>Automation & Communication</strong>
-            Integrated calendar synchronization with automated reminders via email and push
-            notifications for seamless communication.
-          </div>
-          <div class="card">
-            <strong>Multi-Device Delivery</strong>
-            Supported multi-device compatibility with responsive views embedded into external
-            subscriber portals.
-          </div>
-          <div class="card">
-            <strong>Serverless Accuracy</strong>
-            Built AWS Lambda functions to dynamically refresh database views and improve data
-            accuracy in real time.
-          </div>
-          <div class="card">
-            <strong>Multi-Tenant Enablement</strong>
-            Designed a multi-tenant system allowing schools or educational organizations to register
-            independently and manage their own users and content.
-          </div>
-          <div class="card">
-            <strong>Payments</strong>
-            Implemented secure and customized payment gateways for each institution, providing
-            reliable and transparent transaction workflows.
+            <strong>Backend Architecture & DevOps</strong>
+            <ul class="list">
+              <li>Built AWS Lambda functions to dynamically refresh database views and improve data accuracy in real time.</li>
+              <li>Designed a multi-tenant system allowing schools to register independently and manage users and content.</li>
+              <li>Implemented secure and customized payment gateways for each institution.</li>
+              <li>Implemented CI/CD pipelines using GitHub Actions to automate builds and streamline deployments.</li>
+            </ul>
           </div>
         </div>
       </section>
 
-      <section id="cloud">
-        <h2 class="section-title">Cloud Deployment & CI/CD Automation</h2>
-        <ul class="list">
-          <li>Designed and implemented CI/CD pipelines using GitHub Actions for automated build, test, and deployment workflows.</li>
-          <li>Configured pipeline triggers on code commits to enable faster and reliable deployments.</li>
-          <li>Deployed Spring Boot microservices on AWS EC2 with production-ready configurations.</li>
-          <li>Containerized applications using Docker to ensure environment consistency.</li>
-          <li>Managed application configuration using environment variables and secrets management.</li>
-          <li>Configured AWS Security Groups and IAM roles for secure access and permissions.</li>
-          <li>Monitored deployments and performed rollback procedures to ensure system stability.</li>
-        </ul>
-      </section>
-
-      <section id="integration">
-        <h2 class="section-title">Frontend–Backend Integration Layer (TypeScript)</h2>
-        <ul class="list">
-          <li>Developed a TypeScript-based middleware layer to handle communication between frontend and backend services.</li>
-          <li>Integrated RESTful APIs and defined standardized data contracts for frontend consumption.</li>
-          <li>Processed, transformed, and aggregated backend responses to optimize frontend performance.</li>
-          <li>Implemented loose coupling between frontend and backend to improve scalability and maintainability.</li>
-        </ul>
+      <section id="projects">
+        <h2 class="section-title">Projects</h2>
+        <div class="grid two">
+          <div class="card">
+            <strong>Spot Billing Application</strong>
+            <ul class="list">
+              <li>Engineered a real-time billing solution enabling electric meter reading and instant bill generation at customer locations.</li>
+              <li>Automated data capture and billing uploads for accurate on-site invoicing with minimal latency.</li>
+              <li>Designed role-based access controls for secure and flexible usage.</li>
+              <li>Resolved critical production issues and improved system stability by modernizing legacy code.</li>
+              <li>Delivered responsive web interfaces for field operators to ensure smooth data entry and usability.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <strong>Tech Stack</strong>
+            <ul class="list">
+              <li>Java, Spring Boot, Microservices, REST APIs, Spring Data JPA.</li>
+              <li>MySQL, MariaDB, Docker, AWS (Lambda, EC2, S3).</li>
+              <li>Git, GitHub Actions, CI/CD automation.</li>
+              <li>React, TypeScript, responsive UI delivery.</li>
+            </ul>
+          </div>
+        </div>
       </section>
 
       <section id="skills">
@@ -414,7 +512,6 @@
           <div class="skill-tags">
             <span>Core Java</span>
             <span>Spring Boot</span>
-            <span>Spring AI</span>
             <span>AWS</span>
             <span>CI/CD</span>
             <span>GitHub Actions</span>
@@ -457,10 +554,108 @@
           </div>
         </div>
       </section>
+
+      <section id="contact">
+        <h2 class="section-title">Contact</h2>
+        <div class="contact-grid">
+          <div class="contact-item">
+            <strong>Email</strong>
+            shivamkumarg10@gmail.com
+          </div>
+          <div class="contact-item">
+            <strong>Phone</strong>
+            +91 8840170691
+          </div>
+          <div class="contact-item">
+            <strong>Location</strong>
+            Ghaziabad, Uttar Pradesh
+          </div>
+          <div class="contact-item">
+            <strong>LinkedIn</strong>
+            <a href="https://www.linkedin.com/in/shivam-kumar-1496963a1" target="_blank" rel="noopener"
+              >linkedin.com/in/shivam-kumar-1496963a1</a
+            >
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer>
-      © 2026 Shivam | Java Full Stack Developer
+      © 2026 Shivam Kumar | Java Full Stack Developer
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+    <script type="module">
+      import * as THREE from "https://esm.sh/three@0.162.0";
+      const canvas = document.getElementById("bg-canvas");
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(window.innerWidth, window.innerHeight);
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        60,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      );
+      camera.position.z = 90;
+
+      const starGeometry = new THREE.BufferGeometry();
+      const starCount = 800;
+      const positions = new Float32Array(starCount * 3);
+      for (let i = 0; i < starCount * 3; i += 3) {
+        positions[i] = (Math.random() - 0.5) * 320;
+        positions[i + 1] = (Math.random() - 0.5) * 320;
+        positions[i + 2] = (Math.random() - 0.5) * 320;
+      }
+      starGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+      const starMaterial = new THREE.PointsMaterial({
+        color: 0x38bdf8,
+        size: 1.2,
+        transparent: true,
+        opacity: 0.6,
+      });
+      const stars = new THREE.Points(starGeometry, starMaterial);
+      scene.add(stars);
+
+      const glowGeometry = new THREE.SphereGeometry(48, 32, 32);
+      const glowMaterial = new THREE.MeshBasicMaterial({
+        color: 0x22c55e,
+        transparent: true,
+        opacity: 0.08,
+      });
+      const glowSphere = new THREE.Mesh(glowGeometry, glowMaterial);
+      glowSphere.position.set(-40, 25, -30);
+      scene.add(glowSphere);
+
+      const animateBackground = () => {
+        stars.rotation.y += 0.0009;
+        stars.rotation.x += 0.0004;
+        glowSphere.rotation.y += 0.0012;
+        renderer.render(scene, camera);
+        requestAnimationFrame(animateBackground);
+      };
+      animateBackground();
+
+      window.addEventListener("resize", () => {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height);
+      });
+
+      gsap.from(".hero-meta span", {
+        opacity: 0,
+        y: 18,
+        stagger: 0.1,
+        duration: 0.6,
+        ease: "power2.out",
+      });
+      gsap.from(".hero h1", { opacity: 0, y: 24, duration: 0.7, ease: "power2.out" });
+      gsap.from(".hero p", { opacity: 0, y: 20, duration: 0.7, delay: 0.1 });
+      gsap.from(".cta .btn", { opacity: 0, y: 18, stagger: 0.12, duration: 0.6 });
+      gsap.from(".card", { opacity: 0, y: 24, stagger: 0.08, duration: 0.6 });
+    </script>
   </body>
 </html>
