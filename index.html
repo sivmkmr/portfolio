@@ -33,8 +33,11 @@
       }
 
       body {
-        background: radial-gradient(circle at top, #0f172a, #020617);
+        background:
+          radial-gradient(circle at top, #0f172a, #020617),
+          linear-gradient(90deg, #211f2f, #918ca9);
         color: var(--text);
+        font-size: 17px;
       }
 
       #bg-canvas {
@@ -46,12 +49,26 @@
         pointer-events: none;
       }
 
+      .cursor-glow {
+        position: fixed;
+        width: 260px;
+        height: 260px;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 0;
+        background: radial-gradient(circle at center, rgba(255, 255, 255, 0.35), transparent 60%);
+        mix-blend-mode: screen;
+        filter: blur(18px);
+        opacity: 0;
+        transform: translate(-50%, -50%);
+      }
+
       a {
         color: inherit;
       }
 
       .container {
-        width: min(1100px, 92%);
+        width: min(1280px, 94%);
         margin: 0 auto;
       }
 
@@ -98,7 +115,7 @@
       }
 
       .hero {
-        padding: 100px 0 60px;
+        padding: 120px 0 80px;
         display: grid;
         gap: 40px;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -115,7 +132,7 @@
       }
 
       .hero h1 {
-        font-size: clamp(32px, 4vw, 44px);
+        font-size: clamp(40px, 5vw, 54px);
         margin-bottom: 16px;
       }
 
@@ -197,11 +214,11 @@
       }
 
       section {
-        padding: 70px 0;
+        padding: 90px 0;
       }
 
       .section-title {
-        font-size: 26px;
+        font-size: 30px;
         margin-bottom: 24px;
       }
 
@@ -222,6 +239,93 @@
 
       .grid.three {
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .timeline {
+        position: relative;
+        padding-left: 28px;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 8px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(to bottom, rgba(148, 163, 184, 0.3), transparent);
+      }
+
+      .timeline-item {
+        position: relative;
+        margin-bottom: 26px;
+        padding-left: 10px;
+      }
+
+      .timeline-dot {
+        position: absolute;
+        left: -20px;
+        top: 7px;
+        width: 12px;
+        height: 12px;
+        border-radius: 999px;
+        background: radial-gradient(circle at center, #38bdf8, #0f172a);
+        box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.25);
+      }
+
+      .chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .chip {
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.9);
+        border: 1px solid rgba(148, 163, 184, 0.3);
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .badge {
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.9);
+        border: 1px solid rgba(148, 163, 184, 0.3);
+        font-size: 13px;
+      }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 18px;
+      }
+
+      .metric {
+        padding: 18px 18px 16px;
+        border-radius: 18px;
+        background: rgba(15, 23, 42, 0.9);
+        border: 1px solid rgba(148, 163, 184, 0.3);
+        text-align: left;
+      }
+
+      .metric-value {
+        font-size: 26px;
+        font-weight: 700;
+        color: var(--primary);
+      }
+
+      .metric-label {
+        font-size: 13px;
+        color: var(--muted);
       }
 
       .card {
@@ -387,6 +491,7 @@
     </style>
   </head>
   <body>
+    <div class="cursor-glow" id="cursor-glow"></div>
     <canvas id="bg-canvas"></canvas>
     <header>
       <div class="container nav">
@@ -468,6 +573,12 @@
               <li>Integrated calendar synchronization with automated reminders via email and push notifications.</li>
               <li>Supported multi-device compatibility with responsive views embedded into external subscriber portals.</li>
             </ul>
+            <div class="chip-row">
+              <span class="chip">Spring Boot</span>
+              <span class="chip">Spring AI</span>
+              <span class="chip">Gemini LLM</span>
+              <span class="chip">Multi-Tenant</span>
+            </div>
           </div>
           <div class="card">
             <strong>Backend Architecture & DevOps</strong>
@@ -477,6 +588,84 @@
               <li>Implemented secure and customized payment gateways for each institution.</li>
               <li>Implemented CI/CD pipelines using GitHub Actions to automate builds and streamline deployments.</li>
             </ul>
+            <div class="chip-row">
+              <span class="chip">AWS Lambda</span>
+              <span class="chip">EC2</span>
+              <span class="chip">Docker</span>
+              <span class="chip">GitHub Actions</span>
+            </div>
+          </div>
+        </div>
+        <div class="metrics">
+          <div class="metric" data-metric-value="3.2">
+            <div class="metric-value" data-metric-label="Years in production">0</div>
+            <div class="metric-label">Years delivering production systems</div>
+          </div>
+          <div class="metric" data-metric-value="10">
+            <div class="metric-value" data-metric-label="Projects delivered">0</div>
+            <div class="metric-label">End-to-end projects shipped</div>
+          </div>
+          <div class="metric" data-metric-value="99.9">
+            <div class="metric-value" data-metric-label="Uptime">0</div>
+            <div class="metric-label">Target uptime on cloud deployments</div>
+          </div>
+          <div class="metric" data-metric-value="20">
+            <div class="metric-value" data-metric-label="Team size">0</div>
+            <div class="metric-label">Collaborated engineers and stakeholders</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="journey">
+        <h2 class="section-title">Career Journey</h2>
+        <p class="section-subtitle">
+          A quick view of how I progressed from foundations to building production systems.
+        </p>
+        <div class="grid two">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <strong>Virtusa Systems Software · Java Backend Developer</strong>
+              <p>11/2022 – Present · Virginia, USA (remote collaboration)</p>
+              <ul class="list">
+                <li>Deliver Spring Boot microservices powering role-based scheduling and learning workflows.</li>
+                <li>Collaborate with architects, product owners, and QA engineers in Agile sprints.</li>
+                <li>Monitor production health and resolve incidents with a focus on long-term fixes.</li>
+              </ul>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <strong>Master of Computer Applications (MCA)</strong>
+              <p>2019 – 2022 · J.S University, Shikohabad</p>
+              <ul class="list">
+                <li>Specialized in Java, data structures, and software engineering fundamentals.</li>
+                <li>Built academic projects focused on web technologies and database design.</li>
+              </ul>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <strong>Bachelor of Computer Applications (BCA)</strong>
+              <p>2016 – 2019 · Veer Bahadur Singh Purvanchal University, Jaunpur</p>
+              <ul class="list">
+                <li>Strengthened foundations in programming, databases, and operating systems.</li>
+                <li>Developed early web applications and gained confidence in problem solving.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card">
+            <strong>How I like to work</strong>
+            <ul class="list">
+              <li>Translating business needs into clear technical designs and APIs.</li>
+              <li>Owning features end-to-end from design and implementation to deployment.</li>
+              <li>Using metrics, logs, and dashboards to understand real user behavior.</li>
+              <li>Pairing with frontend and DevOps engineers for smooth integration.</li>
+            </ul>
+            <div class="badges">
+              <span class="badge">Production-ready</span>
+              <span class="badge">Clean architecture</span>
+              <span class="badge">Empathy for users</span>
+              <span class="badge">Continuous learning</span>
+            </div>
           </div>
         </div>
       </section>
@@ -501,6 +690,39 @@
               <li>MySQL, MariaDB, Docker, AWS (Lambda, EC2, S3).</li>
               <li>Git, GitHub Actions, CI/CD automation.</li>
               <li>React, TypeScript, responsive UI delivery.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="highlights">
+        <h2 class="section-title">Engineering Highlights</h2>
+        <p class="section-subtitle">
+          A snapshot of the kind of work I enjoy and the quality bar I aim for.
+        </p>
+        <div class="grid three">
+          <div class="card">
+            <strong>Backend Excellence</strong>
+            <ul class="list">
+              <li>Design RESTful APIs with clear contracts and predictable error handling.</li>
+              <li>Use Spring Boot, Spring Data JPA, and MySQL to model business domains.</li>
+              <li>Focus on performance by profiling queries and optimizing hot paths.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <strong>Cloud & DevOps</strong>
+            <ul class="list">
+              <li>Ship services to AWS using EC2, Lambda, and managed databases.</li>
+              <li>Automate CI/CD with GitHub Actions and environment-specific pipelines.</li>
+              <li>Use Docker to keep local development and production environments aligned.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <strong>Frontend Craft</strong>
+            <ul class="list">
+              <li>Build responsive UIs with React and TypeScript that feel fast and intuitive.</li>
+              <li>Connect frontend components to backend APIs with a clean integration layer.</li>
+              <li>Pay attention to accessibility and keyboard-friendly interactions.</li>
             </ul>
           </div>
         </div>
@@ -600,6 +822,10 @@
       );
       camera.position.z = 90;
 
+      const clock = new THREE.Clock();
+      let pointerX = 0;
+      let pointerY = 0;
+
       const starGeometry = new THREE.BufferGeometry();
       const starCount = 800;
       const positions = new Float32Array(starCount * 3);
@@ -618,6 +844,24 @@
       const stars = new THREE.Points(starGeometry, starMaterial);
       scene.add(stars);
 
+      const secondaryStarGeometry = new THREE.BufferGeometry();
+      const secondaryStarCount = 600;
+      const secondaryPositions = new Float32Array(secondaryStarCount * 3);
+      for (let i = 0; i < secondaryStarCount * 3; i += 3) {
+        secondaryPositions[i] = (Math.random() - 0.5) * 260;
+        secondaryPositions[i + 1] = (Math.random() - 0.5) * 260;
+        secondaryPositions[i + 2] = (Math.random() - 0.5) * 260;
+      }
+      secondaryStarGeometry.setAttribute("position", new THREE.BufferAttribute(secondaryPositions, 3));
+      const secondaryStarMaterial = new THREE.PointsMaterial({
+        color: 0x22c55e,
+        size: 0.9,
+        transparent: true,
+        opacity: 0.4,
+      });
+      const secondaryStars = new THREE.Points(secondaryStarGeometry, secondaryStarMaterial);
+      scene.add(secondaryStars);
+
       const glowGeometry = new THREE.SphereGeometry(48, 32, 32);
       const glowMaterial = new THREE.MeshBasicMaterial({
         color: 0x22c55e,
@@ -628,10 +872,46 @@
       glowSphere.position.set(-40, 25, -30);
       scene.add(glowSphere);
 
+      const orbitGroup = new THREE.Group();
+      scene.add(orbitGroup);
+
+      for (let i = 0; i < 10; i++) {
+        const size = 3 + Math.random() * 2;
+        const cubeGeometry = new THREE.BoxGeometry(size, size, size);
+        const cubeMaterial = new THREE.MeshBasicMaterial({
+          color: i % 2 === 0 ? 0x38bdf8 : 0x22c55e,
+          transparent: true,
+          opacity: 0.8,
+        });
+        const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+        const angle = (i / 10) * Math.PI * 2;
+        const radius = 60 + Math.random() * 18;
+        cube.position.set(
+          Math.cos(angle) * radius,
+          Math.sin(angle) * radius * 0.6,
+          -40 + Math.random() * 20
+        );
+        orbitGroup.add(cube);
+      }
+
       const animateBackground = () => {
+        const elapsed = clock.getElapsedTime();
+
         stars.rotation.y += 0.0009;
         stars.rotation.x += 0.0004;
+
+        secondaryStars.rotation.y -= 0.0005;
+        secondaryStars.rotation.x += 0.0003;
+
         glowSphere.rotation.y += 0.0012;
+
+        orbitGroup.rotation.y += 0.0018;
+        orbitGroup.rotation.x = Math.sin(elapsed * 0.2) * 0.2;
+
+        camera.position.x += (pointerX * 20 - camera.position.x) * 0.04;
+        camera.position.y += (-pointerY * 10 - camera.position.y) * 0.04;
+        camera.lookAt(0, 0, 0);
+
         renderer.render(scene, camera);
         requestAnimationFrame(animateBackground);
       };
@@ -656,6 +936,124 @@
       gsap.from(".hero p", { opacity: 0, y: 20, duration: 0.7, delay: 0.1 });
       gsap.from(".cta .btn", { opacity: 0, y: 18, stagger: 0.12, duration: 0.6 });
       gsap.from(".card", { opacity: 0, y: 24, stagger: 0.08, duration: 0.6 });
+
+      const metricsSection = document.querySelector(".metrics");
+      if (metricsSection) {
+        let metricsAnimated = false;
+
+        const runMetricsAnimation = () => {
+          if (metricsAnimated) {
+            return;
+          }
+          metricsAnimated = true;
+
+          const metricElements = metricsSection.querySelectorAll(".metric");
+          metricElements.forEach((metric, index) => {
+            const valueElement = metric.querySelector(".metric-value");
+            const valueTarget = parseFloat(metric.getAttribute("data-metric-value") || "0");
+            const counter = { value: 0 };
+
+            gsap.to(counter, {
+              value: valueTarget,
+              duration: 1.4,
+              delay: index * 0.12,
+              ease: "power2.out",
+              onUpdate() {
+                const isInteger = Math.floor(valueTarget) === valueTarget;
+                const displayValue = isInteger
+                  ? Math.round(counter.value)
+                  : counter.value.toFixed(1);
+                if (valueElement) {
+                  valueElement.textContent = displayValue;
+                }
+              },
+            });
+
+            gsap.from(metric, {
+              opacity: 0,
+              y: 26,
+              duration: 0.8,
+              delay: index * 0.12,
+              ease: "power2.out",
+            });
+          });
+        };
+
+        const metricsObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                runMetricsAnimation();
+                metricsObserver.disconnect();
+              }
+            });
+          },
+          { threshold: 0.4 }
+        );
+
+        metricsObserver.observe(metricsSection);
+      }
+
+      const timeline = document.querySelector(".timeline");
+      if (timeline) {
+        const timelineItems = timeline.querySelectorAll(".timeline-item");
+
+        const revealTimeline = () => {
+          gsap.from(timelineItems, {
+            opacity: 0,
+            x: -26,
+            duration: 0.7,
+            stagger: 0.12,
+            ease: "power2.out",
+          });
+        };
+
+        const timelineObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                revealTimeline();
+                timelineObserver.disconnect();
+              }
+            });
+          },
+          { threshold: 0.3 }
+        );
+
+        timelineObserver.observe(timeline);
+      }
+
+      const cursorGlow = document.getElementById("cursor-glow");
+      let glowVisible = false;
+
+      const showGlow = () => {
+        if (!glowVisible) {
+          glowVisible = true;
+          gsap.to(cursorGlow, { opacity: 1, duration: 0.4, ease: "power2.out" });
+        }
+      };
+
+      const hideGlow = () => {
+        glowVisible = false;
+        gsap.to(cursorGlow, { opacity: 0, duration: 0.5, ease: "power2.out" });
+      };
+
+      window.addEventListener("mousemove", (event) => {
+        showGlow();
+        gsap.to(cursorGlow, {
+          duration: 0.35,
+          x: event.clientX,
+          y: event.clientY,
+          ease: "power3.out",
+        });
+
+        const ratioX = event.clientX / window.innerWidth - 0.5;
+        const ratioY = event.clientY / window.innerHeight - 0.5;
+        pointerX = ratioX;
+        pointerY = ratioY;
+      });
+
+      window.addEventListener("mouseleave", hideGlow);
     </script>
   </body>
 </html>
